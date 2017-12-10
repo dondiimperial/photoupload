@@ -1,2 +1,4 @@
+confusable-homoglyphs==2.0.2
 Django==2.0
+django-registration==2.3
 pytz==2017.3
