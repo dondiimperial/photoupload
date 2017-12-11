@@ -3,4 +3,4 @@
 from django.conf import settings
 
 """The directory where photos are saved"""
-SHOW_PER_PAGE = getattr(settings, 'PHOTOS_SHOW_PER_PAGE', 1)
+SHOW_PER_PAGE = getattr(settings, 'PHOTOS_SHOW_PER_PAGE', 12)

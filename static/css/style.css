@@ -1,7 +1,35 @@
 body {
 
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+
+.form-basic {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-basic .form-basic-heading {
+  margin: 0 0 10px 0;
+}
+.form-basic .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-control {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-bottom: 5px;
+}
+.form-basic button[type='submit'] {
+  margin-top: 10px;
+}
+.photo-list {
+    padding: 0 5px 0 5px;
+}
+.photo-container {
+    padding: 5px;
 }
