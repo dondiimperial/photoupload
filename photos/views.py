@@ -1,29 +1,35 @@
-from django.http import HttpResponse #Will probably delete this later
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .forms import UploadFileForm
+from django.core.paginator import Paginator
+from django.contrib import messages
+from .forms import PhotoUploadForm
 from .models import Photo
+from .settings import SHOW_PER_PAGE
 
 # Create your views here.
 def home(request):
     """Displays all uploaded images"""
-    return HttpResponse('photos home')
+    # Sorted by most recently uploaded.
+    photos = Photo.objects.all().order_by('-uploaded_at')
+    paginator = Paginator(photos, SHOW_PER_PAGE)
+    page = request.GET.get('page')
+    paginated_photos = paginator.get_page(page)
+
+    
+    return render(request, 'photos/home.html', {'paginated_photos': paginated_photos})
 
 @login_required
 def upload(request):
+    """Handle photo uploads"""
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        form = PhotoUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            uploaded_file = request.FILES['file']
-            thumb_name = 'thumb_%s' % uploaded_file.name
-            model = Photo(image_path=uploaded_file.name, thumbnail_path=thumb_name)
-            model.save()
-            
-            #handle_uploaded_file(request.FILES['file'])
+            form.save()
+            messages.info(request, 'Your photo has been uploaded.')
             return HttpResponseRedirect(reverse('photos:home'))
     else:
-        form = UploadFileForm()
+        form = PhotoUploadForm()
     return render(request, 'photos/upload.html', {'form': form})
 

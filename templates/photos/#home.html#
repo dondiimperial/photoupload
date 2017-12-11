@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <h2>All Photos:</h2>
+  {% if paginated_photos %}
+    {% if paginated_photos.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ paginated_photos.previous_page_number }}">previous</a>
+    {% endif %}
+    <br/>  
+    {% for photo in paginated_photos %}
+      <img src="{{ MEDIA_URL }}{{ photo.uploaded_file }}"/> - {{ photo.uploaded_at }}
+    {% endfor %}
+    <br/>
+    {% if paginated_photos.has_next %}
+      <a href="?page={{ paginated_photos.next_page_number }}">next</a>
+      <a href="?page={{ paginated_photos.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}      
+  {% else %}
+    No photos yet.
+  {% endif %}  
+{% endblock %}  

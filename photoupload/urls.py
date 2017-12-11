@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.urls import path
 from django.conf.urls import include, url
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
@@ -26,4 +28,7 @@ urlpatterns = [
     # For the same rationale as above we override the logout view to customize the next page.
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': 'photos:home'}, name='logout'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
