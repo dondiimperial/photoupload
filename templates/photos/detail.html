@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <a href="//{{ request.get_host }}{{ MEDIA_URL }}{{ photo.uploaded_file }}" target="_blank" />Load image in new window</a>
+  </div>
+  <div class="col-md-12">
+    <img class="img-responsive" src="//{{ request.get_host }}{{ MEDIA_URL }}{{ photo.uploaded_file }}" />
+  </div>
+</div>
+{% endblock %}

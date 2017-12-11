@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -20,9 +20,14 @@ def home(request):
     page = request.GET.get('page')
     paginated_photos = paginator.get_page(page)
 
-    
     return render(request, 'photos/home.html', {'paginated_photos': paginated_photos})
 
+def detail(request, photo_id):
+    """View a single photo"""
+    photo = get_object_or_404(Photo, pk=photo_id)
+
+    return render(request, 'photos/detail.html', {'photo': photo})
+    
 @login_required
 def upload(request):
     """Handle photo uploads"""

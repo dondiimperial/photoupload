@@ -3,30 +3,17 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  {% if paginated_photos %}
-    {% if paginated_photos.has_previous or paginated_photos.has_next %}
-      <div class="row">
-        <nav aria-label="..." class="col-md-12">
-          <ul class="pager">
-            {% if paginated_photos.has_previous %}
-              <li class="previous"><a href="?page={{ paginated_photos.previous_page_number }}"><span aria-hidden="true">&larr;</span> Older</a></li>
-            {% endif %}
-            {% if paginated_photos.has_next %}
-              <li class="next"><a href="?page={{ paginated_photos.next_page_number }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
-            {% endif %}
-           </ul>
-        </nav>
+{% if paginated_photos %}
+  {% include 'photos/pagination.html' %}
+  <div class="photo-list row">
+    {% for photo in paginated_photos %}
+      <div class="photo-container col-xs-12 col-md-6 col-lg-4">
+        <a href="{% url 'photos:detail' photo.id %}"><img class="photo-thumbnail img-thumbnail" src="//{{ request.get_host }}{{ MEDIA_URL }}{{ photo.thumb_path }}" /></a>
       </div>
-    {% endif %}
-  
-    <div class="photo-list row">
-      {% for photo in paginated_photos %}
-        <div class="photo-container col-xs-12 col-md-6 col-lg-4">
-          <a href="#"><img class="photo-thumbnail img-thumbnail" src="//{{ request.get_host }}{{ MEDIA_URL }}{{ photo.thumb_path }}" /></a>
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    No photos yet.
-  {% endif %}
+    {% endfor %}
+  </div>
+  {% include 'photos/pagination.html' %}
+{% else %}
+  No photos yet.
+{% endif %}
 {% endblock %}

@@ -1,0 +1,14 @@
+{% if paginated_photos.has_previous or paginated_photos.has_next %}
+  <div class="row">
+    <nav aria-label="..." class="col-md-12">
+      <ul class="pager">
+        {% if paginated_photos.has_previous %}
+           <li class="previous"><a href="?page={{ paginated_photos.previous_page_number }}"><span aria-hidden="true">&larr;</span> Older</a></li>
+         {% endif %}
+         {% if paginated_photos.has_next %}
+           <li class="next"><a href="?page={{ paginated_photos.next_page_number }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+         {% endif %}
+       </ul>
+     </nav>
+  </div>
+{% endif %}
