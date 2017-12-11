@@ -19,7 +19,11 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="home.html")),
+    url('', include('photos.urls', namespace='photos')),
+    # Override the login url from the django-registration-redux. 
+    # Otherwise there is no way to set redirect_authenticated_user to true for
+     url(r'^accounts/login/$', auth_views.login, {'redirect_authenticated_user': True}, name='auth_login'),
+    # For the same rationale as above we override the logout view to customize the next page.
+    url(r'^accounts/logout/$', auth_views.logout, {'next_page': 'photos:home'}, name='logout'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^login/$', auth_views.login, name='login')
 ]

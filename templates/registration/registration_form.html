@@ -1,12 +1,14 @@
-<html>
-<head>
-<title></title>
-</head>
-<body>
-  <form action="{% url 'registration_register' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="Submit" />
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<form action="{% url 'registration_register' %}" method="post">
+  {% csrf_token %}
+  {{ form.as_table }}
+  <input type="submit" value="Submit" />
 </form>
-</body>
-</html>
+<div>
+  Already signed up? <a href="{% url 'auth_login' %}">Login</a>.
+</div>
+{% endblock %}
