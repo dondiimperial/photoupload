@@ -31,5 +31,21 @@ body {
     padding: 0 5px 0 5px;
 }
 .photo-container {
-    padding: 5px;
+    padding: 8px;
+}
+.photo-container, .photo-thumbnail {
+    width: 100%;
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .photo-container {
+      width: 50%;
+  }  
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .photo-container {
+      width: 33%;
+  }
 }

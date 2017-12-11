@@ -4,9 +4,14 @@
 
 {% block content %}
   <h2>Upload a Photo</h2>
-  <form method="post" enctype="multipart/form-data">
+  <form class="form-basic" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
+    <div class="row {% if form.errors.email %}has-error{% endif %}">
+      <label for="id_uploaded_file" class="sr-only">Photo</label>
+      <input type="file" name="uploaded_file" class="form-control" required id="id_uploaded_file" />
+    </div>
+    <div class="row">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+    </div>
   </form>
 {% endblock %}  
