@@ -5,13 +5,13 @@
 {% block content %}
   
   <form class="form-basic" method="post" action="{% url 'auth_login' %}">
-    <h2 class="form-basic-heading">Log In</h2>
+    <h2 class="form-basic-heading">Sign In</h2>
     {% csrf_token %}
     <label for="id_username" class="sr-only">Username</label>
     <input type="username" id="id_username" name="username" class="form-control" placeholder="Username" maxlength="150" required autofocus>
     <label for="id_password" class="sr-only">Password</label>
     <input type="password" id="id_password" class="form-control" placeholder="Password" name="password" required>    
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
   </form>
   <div class="center-block text-center">
     Need an account? <a href="{% url 'registration_register' %}">Sign Up</a>.
