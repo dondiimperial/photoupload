@@ -33,28 +33,30 @@
       <div class="container text-center">
         <h2>{{msg}}</h2>
       </div>
-      <div class="container text-center">
-        {% if messages %}
-        <div class="alert alert-success" role="alert">
-          <ul class="messages">
-            {% for message in messages %}
-            <li class="message">{{ message }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-
-        {% if form.errors %}
-          {% for error in form.non_field_errors %}
-          <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
+      {% if ip_valid %}
+        <div class="container text-center">
+          {% if messages %}
+          <div class="alert alert-success" role="alert">
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="message">{{ message }}</li>
+              {% endfor %}
+            </ul>
           </div>
-          {% endfor %}
+          {% endif %}
+
+          {% if form.errors %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+              <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+          {% endif %}
+          <div id="content">
+            {% block content %}
+            {% endblock %}
+          </div>
         {% endif %}
-        <div id="content">
-          {% block content %}
-          {% endblock %}
-        </div>
       </div>
     </div> <!-- /container -->    
 
